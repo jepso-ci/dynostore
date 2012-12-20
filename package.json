@@ -1,0 +1,21 @@
+{
+  "name": "dynostore",
+  "version": "0.0.0",
+  "description": "Dynamo db wrapper for the jepso-ci schema",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "~0.9.1-pre.2",
+    "debug": "~0.7.0",
+    "promises-a": "~2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jepso-ci/dynostore.git"
+  },
+  "author": "",
+  "license": "MIT"
+}
