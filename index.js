@@ -104,7 +104,7 @@ function setRepoBuildComplete(user, repo, build) {
 function listBuilds(user, repo) {
 
 }
-expors.getBuild = getBuild;
+exports.getBuild = getBuild;
 function getBuild(user, repo, buildID) {
   return fix(db.getItem({
     TableName: 'builds',
