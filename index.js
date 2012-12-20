@@ -132,10 +132,10 @@ function createBuild(user, repo, buildID, browsers) {
   for (var i = 0; i < browsers.length; i++) {
     item[browsers[i]] = {S: 'queued'}
   }
-  db.putItem({
+  return fix(db.putItem({
     TableName: 'builds',
     Item: item
-  });
+  }));
 }
 
 var s3 = new aws.S3();
