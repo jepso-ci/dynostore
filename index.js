@@ -29,6 +29,7 @@ aws.config.update({accessKeyId: key, secretAccessKey: secret});
 aws.config.update({region: 'us-east-1'});
 
 var db = new aws.DynamoDB({sslEnabled: true}).client;
+exports.createTables = createTables;
 function createTables() {
   var reposTable = fix(db.createTable({
     TableName: 'repositories',
@@ -57,6 +58,7 @@ function createTables() {
 function listRepos(user) {
   
 }
+exports.getRepo = getRepo;
 function getRepo(user, repo) {
   return fix(db.getItem({
     TableName: 'repositories',
@@ -73,6 +75,7 @@ function getRepo(user, repo) {
     }
   });
 }
+exports.setRepoBuildInProgress = setRepoBuildInProgress;
 function setRepoBuildInProgress(user, repo, build) {
   return fix(db.updateItem({
     TableName: 'repositories',
@@ -85,6 +88,7 @@ function setRepoBuildInProgress(user, repo, build) {
     }
   }));
 }
+exports.setRepoBuildComplete = setRepoBuildComplete;
 function setRepoBuildComplete(user, repo, build) {
   return fix(db.updateItem({
     TableName: 'repositories',
@@ -100,6 +104,7 @@ function setRepoBuildComplete(user, repo, build) {
 function listBuilds(user, repo) {
 
 }
+expors.getBuild = getBuild;
 function getBuild(user, repo, buildID) {
   return fix(db.getItem({
     TableName: 'builds',
@@ -117,6 +122,7 @@ function getBuild(user, repo, buildID) {
       });
   });
 }
+exports.createBuild = createBuild;
 function createBuild(user, repo, buildID, browsers) {
   var item = {
       repoID: {S: user + '/' + repo},
