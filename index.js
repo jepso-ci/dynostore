@@ -105,12 +105,12 @@ function listBuilds(user, repo) {
 
 }
 exports.getBuild = getBuild;
-function getBuild(user, repo, buildID) {
+function getBuild(user, repo, tag) {
   return fix(db.getItem({
     TableName: 'builds',
     Key: {
       HashKeyElement: { S: user + '/' + repo },
-      RangeKeyElement: { S: buildID }
+      RangeKeyElement: { S: tag }
     }
   })).then(function (data) {
     var res = {};
@@ -123,10 +123,10 @@ function getBuild(user, repo, buildID) {
   });
 }
 exports.createBuild = createBuild;
-function createBuild(user, repo, buildID, browsers) {
+function createBuild(user, repo, tag, browsers) {
   var item = {
       repoID: {S: user + '/' + repo},
-      buildID: {S: buildID},
+      buildID: {S: tag},
       state: {S: 'pending'}
     };
   for (var i = 0; i < browsers.length; i++) {
@@ -137,9 +137,25 @@ function createBuild(user, repo, buildID, browsers) {
     Item: item
   }));
 }
+exports.updateBuild = updateBuild;
+function updateBuild(user, repo, tag, browser, status) {
+  var update = {};
+  update[browser] = {S: status}
+  return fix(db.updateItem({
+    TableName: 'builds',
+    Key: {
+      HashKeyElement: {S: user + '/' + repo},
+      RangeKeyElement: {S: tag}
+    },
+    AttributeUpdates: update
+  }));
+}
 
 var s3 = new aws.S3();
 //read from S3
-function getBuildReport(user, repo, buildID, browser) {
+function getBuildReport(user, repo, tag, browser) {
+
+}
+function saveBuildReport(user, repo, tag, browser) {
 
 }
