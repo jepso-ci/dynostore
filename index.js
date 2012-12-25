@@ -140,7 +140,7 @@ function createBuild(user, repo, tag, browsers) {
 exports.updateBuild = updateBuild;
 function updateBuild(user, repo, tag, browser, status) {
   var update = {};
-  update[browser] = {S: status}
+  update[browser] = {Value: {S: status}};
   return fix(db.updateItem({
     TableName: 'builds',
     Key: {
