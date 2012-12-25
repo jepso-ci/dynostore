@@ -113,6 +113,7 @@ function getBuild(user, repo, tag) {
       RangeKeyElement: { S: tag }
     }
   })).then(function (data) {
+    data = data.Item;
     var res = {};
     Object.keys(data)
       .forEach(function (key) {
