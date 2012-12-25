@@ -120,6 +120,7 @@ function getBuild(user, repo, tag) {
           res[key] = data[key].S;
         }
       });
+    return res;
   });
 }
 exports.createBuild = createBuild;
